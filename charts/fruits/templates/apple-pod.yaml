@@ -1,0 +1,40 @@
+{{ if or .Values.apple.enabled .Values.allEnabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ .Release.Name }}-apple
+  labels:
+    app: {{ .Release.Name }}-apple
+spec:
+  replicas: {{ .Values.apple.replicaCount}}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-apple
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-apple
+    spec:
+      containers:
+      - name: apple
+        image: "{{- .Values.apple.imageName -}}:{{- .Values.apple.imageTag -}}"
+        resources:
+          limits:
+            memory: {{ .Values.apple.resources.limits.memory }}
+            cpu: {{ .Values.apple.resources.limits.cpu }}
+          requests:
+            memory: {{ .Values.apple.resources.requests.memory }}
+            cpu: {{ .Values.apple.resources.requests.cpu }}
+        ports: {{- toYaml .Values.apple.ports | nindent 8 }}
+        env:
+        - name: ENV_VARIABLE_NAME1
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Release.Name }}-apple-configmap
+              key: env1
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+{{ end }}

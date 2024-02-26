@@ -1,0 +1,15 @@
+{{ if or .Values.apple.enabled .Values.allEnabled }}
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name:  {{ .Release.Name }}-apple-svc
+  labels:
+    app: {{ .Release.Name }}-apple-svc
+spec:
+  selector:
+    app: apple
+  ports: {{- toYaml .Values.apple.services.clusterip.ports | nindent 8 }}
+
+{{ end }}

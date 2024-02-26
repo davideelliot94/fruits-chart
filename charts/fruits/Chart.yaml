@@ -1,0 +1,6 @@
+apiVersion: v2
+name: fruits
+version: 0.1.0
+appVersion: "0.1"
+description: My first fruitservice chart
+icon: https://images.creativefabrica.com/products/previews/2023/11/09/zZJQiA5rp/2XwJ507FcV38C0WBEPn0dlOfAHA-desktop.jpg

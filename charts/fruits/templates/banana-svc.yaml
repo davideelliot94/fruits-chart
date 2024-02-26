@@ -1,0 +1,14 @@
+{{ if or .Values.banana.enabled .Values.allEnabled }}
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name:  {{ .Release.Name }}-banana-svc
+  labels:
+    app:  {{ .Release.Name }}-banana-svc
+spec:
+  selector:
+    app: banana
+  ports: {{- toYaml .Values.banana.services.clusterip.ports | nindent 8 }}
+{{ end }}

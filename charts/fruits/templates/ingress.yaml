@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{.Release.Name }}-ingress
+  labels:
+    name: {{.Release.Name }}-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      {{ if or .Values.apple.enabled .Values.allEnabled }}
+
+      - pathType: Exact
+        path: "/apple"
+        backend:
+          service:
+            name: {{.Release.Name }}-apple-svc
+            port: 
+              number: {{ .Values.apple.ingress.port}}
+      {{ end }}
+      {{ if or .Values.banana.enabled .Values.allEnabled }}
+
+      - pathType: Exact
+        path: "/banana"
+        backend:
+          service:
+            name: {{.Release.Name }}-banana-svc
+            port: 
+              number: {{ .Values.banana.ingress.port}}
+      {{ end }}

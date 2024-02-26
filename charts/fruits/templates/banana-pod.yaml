@@ -1,0 +1,32 @@
+{{ if or .Values.banana.enabled .Values.allEnabled }}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ .Release.Name }}-banana
+  labels:
+    app: {{ .Release.Name }}-banana
+spec:
+  replicas: {{ .Values.banana.replicaCount}}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-banana
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-banana
+    spec:
+      containers:
+      - name: banana
+        image: "{{- .Values.banana.imageName -}}:{{- .Values.banana.imageTag -}}"
+        resources:
+          limits:
+            memory: {{ .Values.banana.resources.limits.memory }}
+            cpu: {{ .Values.banana.resources.limits.cpu }}
+          requests:
+            memory: {{ .Values.banana.resources.requests.memory }}
+            cpu: {{ .Values.banana.resources.requests.cpu }}
+        ports: {{- toYaml .Values.banana.ports | nindent 8 }}
+{{ end }}
+      

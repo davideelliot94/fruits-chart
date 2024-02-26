@@ -1,0 +1,47 @@
+replicaCount: 1
+allEnabled: false 
+
+apple:
+  enabled: true
+  replicaCount: 3
+  imageName: davideelliot/apple
+  imageTag: 0.3
+  ports:
+  - containerPort: 3000
+  resources:
+    limits:
+      memory: "256Mi"
+      cpu: "1000m"
+    requests:
+      memory: "128Mi"
+      cpu: "500m"
+  configs:
+    env1: "Variabile Config Map Nuova"
+  services:
+    clusterip:
+      ports:
+      - port: 3000
+  ingress:
+    port: 3000
+
+banana:
+  enabled: true
+  replicaCount: 1
+  imageName: davideelliot/banana
+  imageTag: 0.2
+  ports:
+  - containerPort: 3000
+  resources:
+    limits:
+      memory: "256Mi"
+      cpu: "1000m"
+    requests:
+      memory: "128Mi"
+      cpu: "500m"
+  services:
+    clusterip:
+      ports:
+      - port: 3000
+  ingress:
+    port: 3000
+
