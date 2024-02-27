@@ -3,12 +3,12 @@ entries:
   fruits:
   - apiVersion: v2
     appVersion: "0.1"
-    created: "2024-02-26T17:07:32.9915785+01:00"
+    created: "2024-02-27T14:42:35.501488945+01:00"
     description: My first fruitservice chart
     digest: 224611e0196e2081abdd6e40f4423134e77505db6db3642ae16fdfd878d9b7aa
     icon: https://images.creativefabrica.com/products/previews/2023/11/09/zZJQiA5rp/2XwJ507FcV38C0WBEPn0dlOfAHA-desktop.jpg
     name: fruits
     urls:
-    - https://davideelliot94.github.io/fruits-chart/fruits-0.1.0.tgz
+    - fruits-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-26T17:07:32.990912257+01:00"
+generated: "2024-02-27T14:42:35.501093638+01:00"
